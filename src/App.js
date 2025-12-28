@@ -7927,8 +7927,8 @@ const App = {
         });
     },
     apiService: {
-        ENDPOINT: 'https://script.google.com/macros/s/AKfycbxCa6Yo_VdK5t9T7ZCHabxT1EY-xACEC3VUDHgkkwGdduF2U5VMGlp0KXBu9CtE8cWv9Q/exec',
-        ENDPOINT_TEST: 'https://script.google.com/macros/s/AKfycbzvoH9j7Ia0Zc_dCBXXYI6dB9UlUR_tGGr1J5Gsu2DG/dev',
+       ENDPOINT: 'none',
+       ENDPOINT_TEST: 'none',
         _getUid: () => {
             return App.userName + '-' + App.userId;
         },
