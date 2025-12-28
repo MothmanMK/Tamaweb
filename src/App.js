@@ -7699,7 +7699,7 @@ const App = {
         else if(App.isOnElectronClient) type += '_electron';
 
         const user = (App.userName ? App.userName + '-' : '') + App.userId;
-        const url = `https://docs.google.com/forms/d/e/1FAIpQLSfzl5hhhnV3IAdxuA90ieEaeBAhCY9Bh4s151huzTMeByMwiw/formResponse?usp=pp_url&entry.1384465975=${user}&entry.1653037117=${App.petDefinition?.name || ''}&entry.1322693089=${type}&entry.1403809294=${value || ''}`;
+        const url = `none`;
 
         fetch(url).catch(e => {});
     },
@@ -7709,7 +7709,7 @@ const App = {
         const sendingText = `[game:${VERSION}-pl:${App.isOnItch ? 'itch' : 'web'}]: ${text}`;
 
         const user = (App.userName ? App.userName + '-' : '') + App.userId;
-        const url = `https://docs.google.com/forms/d/e/1FAIpQLSenonpIhjHL8BYJbnOHqF2KudJiDciEveJG56BdGsvJ01-rTA/formResponse?usp=pp_url&entry.1753365981=${user}&entry.233513152=${sendingText}`;
+        const url = `none`;
         fetch(url).catch(e => {});
     },
     sendErrorLog: function(error, force){
@@ -7729,7 +7729,7 @@ const App = {
 
         const versionInfo = `[game:${VERSION}-pl:${App.isOnItch ? 'itch' : 'web'}]`;
         const user = (App.userName ? App.userName + '-' : '') + App.userId;
-        const url = `https://docs.google.com/forms/d/e/1FAIpQLScSloIis4P1yyKQ3imYcaipOk2XS12Qj16ZeM4DicTHi3RSCQ/formResponse?usp=pp_url&entry.1957124188=${user}&entry.1587672397=${`${versionInfo} - ${navigator?.userAgent}`}&entry.36658531=${error}`
+        const url = `none`
         fetch(url).catch(e => {});
     },
     installAsPWA: function() { 
