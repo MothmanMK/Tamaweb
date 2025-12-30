@@ -112,7 +112,7 @@ const Missions = {
     },
     openRewardsMenu: function(){
         const defs = App.definitions;
-        App.sendAnalytics('opened_mission_rewards', Missions.currentPts);
+        
         const foodPool = Object.keys(defs.food)
         .filter(key => defs.food[key].price > 0)
         .map(key => { 
@@ -299,7 +299,7 @@ const Missions = {
                                     document.querySelector('#mission-pts').textContent = Missions.currentPts;
                                     list.close();
                                     Missions.openRewardsMenu();
-                                    App.sendAnalytics('opened_mission_chest', chest.name);
+                                    
                                 }
                             },
                             {
@@ -379,7 +379,7 @@ const Missions = {
                     onclick: (btn) => {
                         btn?.remove();
                         m.isClaimed = true;
-                        App.sendAnalytics('mission_done', m.type);
+                        
                         setTimeout(() => App.playSound('resources/sounds/ui_click_03.ogg', true))
                         if(Missions.currentStep < Missions.MAX_STEPS){
                             Missions.currentPts += m.pts;

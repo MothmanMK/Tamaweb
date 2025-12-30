@@ -339,7 +339,7 @@ const App = {
         if(App.settings.automaticAging){
             while(moment().isAfter( App.petDefinition.getNextAutomaticBirthdayDate() )){
                 App.petDefinition.ageUp()
-                App.sendAnalytics('auto_age_up', App.petDefinition.lifeStage);
+                
             }
         }
 
@@ -516,7 +516,7 @@ const App = {
                 gold: App.pet?.stats.gold,
                 ver: VERSION
             }
-            App.sendAnalytics('login', JSON.stringify(analyticsData));
+            
         } else {
             const analyticsData = {
                 session_id: App.sessionId,
@@ -529,7 +529,7 @@ const App = {
                 has_poop_out: App.pet?.stats.has_poop_out,
                 is_sleeping: App.pet?.stats.is_sleeping,
             }
-            App.sendAnalytics('logout', JSON.stringify(analyticsData));
+            
         }
     },
     applySettings: function(){
@@ -1008,7 +1008,7 @@ const App = {
                     name: 'see whats new',
                     class: 'solid primary',
                     onclick: () => {
-                        App.sendAnalytics('go_to_blog_whats_new');
+                        
                     }
                 },
             ])
@@ -1016,7 +1016,7 @@ const App = {
 
         if(addEvent('itch_rating_dialog', () => {
             App.handlers.show_rating_dialog();
-            App.sendAnalytics('rating_auto_shown');
+            
         })) return;
 
         // if(addEvent(`smallchange_01_notice`, () => {
@@ -1040,13 +1040,13 @@ const App = {
                             App.pet.playCheeringAnimation();
                         });
                         App.pet.stats.gold += 200;
-                        App.sendAnalytics('game_suggestions_poll_01', data);
+                        
                     },
                 },
                 {
                     name: 'cancel',
                     onclick: () => {
-                        App.sendAnalytics('game_suggestions_poll_01', 'action_user_cancel');
+                        
                     },
                 }
             ]);
@@ -1060,7 +1060,7 @@ const App = {
                     name: 'join (+$200)',
                     onclick: () => {
                         App.pet.stats.gold += 200;
-                        App.sendAnalytics('discord_02_notice_accept');
+                        
                         return false;
                     },
                 }, 
@@ -1072,7 +1072,7 @@ const App = {
                     }
                 }
             ]);
-            App.sendAnalytics('discord_02_notice_shown');
+            
         })) return;
 
         /* if(App.isSalesDay()){
@@ -1597,7 +1597,7 @@ const App = {
             ])
         };
 
-        App.sendAnalytics('edit_furniture');
+        
         return true;
     },
     handleGardenPlantsSpawn(shouldSpawn){
@@ -2164,14 +2164,14 @@ const App = {
                         link: App.routes.ITCH_REVIEW,
                         name: `rate!`,
                         onclick: () => {
-                            App.sendAnalytics('rate_accept');
+                            
                         }
                     },
                     {
                         name: `cancel`,
                         class: 'back-btn',
                         onclick: () => {
-                            App.sendAnalytics('rate_decline');
+                            
                         }
                     }
                 ]
@@ -2247,7 +2247,7 @@ const App = {
                         if(username.length > 18) return App.displayPopup('Your username cannot have more than 18 characters.');
                         App.userName = username;
                         App.save();
-                        App.sendAnalytics('new_user', username);
+                        
                     }
                 }
             ])
@@ -2854,7 +2854,7 @@ const App = {
                                                                             onclick: () => {
                                                                                 App.mods.splice(App.mods.indexOf(modInfo), 1);
                                                                                 App.save();
-                                                                                App.sendAnalytics('mod_uninstall', modInfo.name);
+                                                                                
                                                                                 App.displayPopup(`<b>${modInfo.name}</b> uninstalled successfully, refreshing...`, null, () => location.reload());
                                                                             }
                                                                         },
@@ -2895,13 +2895,13 @@ const App = {
                                 const duplicateIndex = App.mods.findIndex(({ id }) => id == json.id);
                                 if(duplicateIndex != -1){
                                     App.mods[duplicateIndex] = json;
-                                    App.sendAnalytics('mod_update', json.name);
+                                    
                                     App.displayPopup(`<b>${json.name}</b> updated! <br><br> refreshing...`, 2000, () => {
                                         location.reload();
                                     })
                                 } else {
                                     App.mods.push(json);
-                                    App.sendAnalytics('mod_install', json.name);
+                                    
                                     App.displayPopup(`<b>${json.name}</b> installed! <br><br> refreshing...`, 2000, () => {
                                         location.reload();
                                     })
@@ -3469,7 +3469,7 @@ const App = {
                     link: App.routes.BLOG,
                     name: `<b>see changelog</b>`,
                     onclick: () => {
-                        App.sendAnalytics('go_to_blog');
+                        
                         return true;
                     },
                 },
@@ -3656,7 +3656,7 @@ const App = {
             list.appendChild(content)
             charactersDef.forEach(def => UI.create({...def, parent: content}))
 
-            App.sendAnalytics('opened_character_collection');
+            
         },
         open_family_tree: function(petDefinition, usePastTense){
             if(!petDefinition) petDefinition = App.petDefinition;
@@ -3738,7 +3738,7 @@ const App = {
             `;
 
             list.appendChild(content);
-            App.sendAnalytics('opened_family_tree');
+            
         },
         open_food_list: function(props = {}){
             const {
@@ -4366,7 +4366,7 @@ const App = {
                                 name: unlockEventState ? 'reward collected' : 'collect reward',
                                 class: unlockEventState && 'disabled',
                                 onclick: () => {
-                                    App.sendAnalytics('achievement_reward_collect', name);
+                                    
                                     App.addEvent(unlockEventName);
                                     // do this to remove the badge from achievements 
                                     // button in stats menu
@@ -4545,7 +4545,7 @@ const App = {
                             break;
                     }
 
-                    App.sendAnalytics('craft', current.name);
+                    
                     App.pet.stats.current_expression += 2;
                     App.pet.stats.current_logic += 3;
                 }
@@ -4642,7 +4642,7 @@ const App = {
                         Activities.redecorRoom();
                         scene.image = current.image;
 
-                        App.sendAnalytics('home_background_change', scene.image);
+                        
 
                         return false;
                     }
@@ -4778,7 +4778,7 @@ const App = {
                         if(equipped) App.petDefinition.accessories.splice(App.petDefinition.accessories.indexOf(accessoryName), 1);
                         else App.petDefinition.accessories.push(accessoryName);
                         Activities.getDressed(() => App.pet.equipAccessories(), reopen, !equipped);
-                        App.sendAnalytics('accessory', `${accessoryName} (${!equipped})`);
+                        
                     }
                 })
             }
@@ -5155,7 +5155,7 @@ const App = {
                                     App.closeAllDisplays();
                                     App.addNumToObject(App.pet.inventory.misc, 'underworld tickets', -1);
                                     App.handlers.open_devil_town_activity_list();
-                                    App.sendAnalytics('enter_underworld');
+                                    
                                 }
                             },
                             {
@@ -5211,7 +5211,7 @@ const App = {
                                             Activities.goToHomePlanet(otherPet);
                                             App.save();
                                             App.closeAllDisplays();
-                                            App.sendAnalytics('rabbit_hole', hole.name);
+                                            
                                         }
                                     },
                                     {
@@ -5594,7 +5594,7 @@ const App = {
                                         Activities.goToOnlineHub();
                                     })
             
-                                    App.sendAnalytics('go_to_online_hub');
+                                    
                                 }
                             },
                             {
@@ -5708,7 +5708,7 @@ const App = {
                                                 name: 'Yes',
                                                 onclick: () => {
                                                     if(!App.pay(totalPrice)) return false;
-                                                    App.sendAnalytics('online_food_order', totalPrice);
+                                                    
                                                     getOrders().forEach(order => {
                                                         App.addNumToObject(App.pet.inventory.food, order.foodName, order.current.orderAmount);
                                                         Missions.done(Missions.TYPES.order_food);
@@ -5800,7 +5800,7 @@ const App = {
                                 onclick: () => {
                                     const commitFn = () => {
                                         goToVacation(Activities.seaVacation)
-                                        App.sendAnalytics('go_on_vacation');
+                                        
                                         App.definitions.achievements.go_to_vacation_x_times.advance();
                                         App.save();
                                     }
@@ -7457,7 +7457,7 @@ const App = {
                 }
             ])
             console.error(e)
-            App.sendAnalytics('LoaderError', `${e} - ${navigator?.userAgent}`);
+            
             UI.fadeOut(document.querySelector('.loading-text'));
         }
 
@@ -7737,9 +7737,9 @@ const App = {
         App.deferredInstallPrompt.prompt();
         App.deferredInstallPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
-                App.sendAnalytics('pwa_install', navigator?.userAgent);
+                
             } else {
-                App.sendAnalytics('pwa_install_cancel', navigator?.userAgent);
+                
             }
         });
     },

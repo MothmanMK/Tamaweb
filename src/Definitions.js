@@ -964,7 +964,7 @@ App.definitions = (() => {
                             App.toggleGameplayControls(true);
                             App.pet.playCheeringAnimation();
                         });
-                        App.sendAnalytics('age_up_potion', App.petDefinition.lifeStage);
+                        
                     });
                 },
             },
@@ -1008,7 +1008,7 @@ App.definitions = (() => {
                                 }
                             });
                         });
-                        App.sendAnalytics('potion life essence');
+                        
                     });
                 }
             }

@@ -1433,7 +1433,7 @@ class Activities {
             `, App.INF);
         })
 
-        App.sendAnalytics('reckoning_encounter');
+        
         return true;
     }
     static async revive(){
@@ -1702,7 +1702,7 @@ class Activities {
             });
         });
 
-        App.sendAnalytics('visit_fortune_teller');
+        
     }
     static async useItem(item){
         App.closeAllDisplays();
@@ -1911,7 +1911,7 @@ class Activities {
                                 App.handleGardenPlantsSpawn(true);
                                 Missions.done(Missions.TYPES.plant_in_garden);
                                 Activities.task_floatingObjects(10, ['resources/img/misc/add_green_01.png']);
-                                App.sendAnalytics('plant', plantName);
+                                
                                 return true;
                             }
                             return false;
@@ -1992,7 +1992,7 @@ class Activities {
                                             }
                                         }
                                     ])
-                                    App.sendAnalytics('harvest', plant.name);
+                                    
                                     App.pet.stats.current_logic += 0.25;
                                     return true;
                                 },
@@ -2162,7 +2162,7 @@ class Activities {
                 App.animals.list.push(newAnimal);
                 App.displayPopup(`A new animal ${newAnimal.getFullCSprite()} has chosen your backyard as their new home. Take good care of them!`, 3000, () => openChooseNameDialog(newAnimal));
                 App.pet.stats.current_expression += 2;
-                App.sendAnalytics('animal_arrived');
+                
             } else if(App.animals.treatBiteCount > 2) {
                 resetTreat();
                 App.pet.stats.current_endurance += 3;
@@ -2700,7 +2700,7 @@ class Activities {
                                 }
                                 App.addRecord(unlockKey, 1, true);
                                 App.displayPopup(`<b>${name}</b> unlocked!`)
-                                App.sendAnalytics('unlocked_hubchi_reward_item', name);
+                                
                             } : undefined
                         },
                         {
@@ -2947,7 +2947,7 @@ class Activities {
     } = {}){
         App.closeAllDisplays();
         App.pet.triggerScriptedState('idle', App.INF, 0, false);
-        App.sendAnalytics('cooking_game', resultFoodName || '');
+        
         Missions.done(Missions.TYPES.cook);
         App.pet.stats.current_expression += 1.5;
         // App.setScene(App.scene.kitchen);
@@ -3114,7 +3114,7 @@ class Activities {
         });
     }
     static async pet(){
-        App.sendAnalytics('petting');
+        
         let idleTimer = null, closeTimer = null, y = App.pet.y;
         App.pet.stopMove();
         App.pet.x = '50%';
@@ -3322,7 +3322,7 @@ class Activities {
         App.registerOnDrawEvent(drawEvent);
     }
     static stayAtParents(end){
-        App.sendAnalytics('stay_at_parents');
+        
 
         if(end){
             App.toggleGameplayControls(true);
@@ -3705,7 +3705,7 @@ class Activities {
                         App.pet.playCheeringAnimation();
                     });
 
-                    App.sendAnalytics('age_up', App.petDefinition.lifeStage);
+                    
                 });
             });
         });
@@ -4267,7 +4267,7 @@ class Activities {
     static async flagsGame(){
         App.closeAllDisplays();
         App.petDefinition.checkWant(true, App.constants.WANT_TYPES.minigame);
-        App.sendAnalytics('minigame_flags');
+        
 
         App.toggleGameplayControls(false, () => {});
         App.setScene(App.scene.full_grass);
@@ -4395,7 +4395,7 @@ class Activities {
     static async dogWashingGame(){
         App.closeAllDisplays();
         App.petDefinition.checkWant(true, App.constants.WANT_TYPES.minigame);
-        App.sendAnalytics('minigame_dog_washing');
+        
         App.setScene(App.scene.animalBathroom);
         App.toggleGameplayControls(false);
         App.pet.stopMove();
@@ -4505,7 +4505,7 @@ class Activities {
     }
     static async plantMatchingGame(){
         App.petDefinition.checkWant(true, App.constants.WANT_TYPES.minigame);
-        App.sendAnalytics('minigame_plant_matching');
+        
 
         const getRandomPlant = () => 
             randomFromArray(Object.keys(App.definitions.plant))
@@ -4621,7 +4621,7 @@ class Activities {
         App.closeAllDisplays();
         App.toggleGameplayControls(false);
         App.petDefinition.checkWant(true, App.constants.WANT_TYPES.minigame);
-        App.sendAnalytics('minigame_bar_timing');
+        
         App.setScene(App.scene.arcade_game01);
 
         let screen = App.displayEmpty();
@@ -4709,7 +4709,7 @@ class Activities {
         App.setScene(App.scene.park);
         App.toggleGameplayControls(false);
         App.petDefinition.checkWant(true, App.constants.WANT_TYPES.minigame);
-        App.sendAnalytics('minigame_falling_stuff');
+        
         App.mouse.x = null;
         
         App.pet.speedOverride = 0.07;
@@ -4852,7 +4852,7 @@ class Activities {
         App.setScene(App.scene.arcade);
         App.toggleGameplayControls(false);
         App.petDefinition.checkWant(true, App.constants.WANT_TYPES.minigame);
-        App.sendAnalytics('minigame_mimic');
+        
 
         const opponentPetDef = new PetDefinition({
             name: 'park_game_npc',
@@ -4968,7 +4968,7 @@ class Activities {
         App.setScene(App.scene.park);
         App.toggleGameplayControls(false);
         App.petDefinition.checkWant(true, App.constants.WANT_TYPES.minigame);
-        App.sendAnalytics('minigame_park_rng');
+        
 
         // const randomPetRef = App.getRandomPetDef();
         const randomPetRef = new PetDefinition({
@@ -5291,7 +5291,7 @@ class Activities {
         App.setScene(App.scene.music_classroom);
         App.pet.stopMove();
         App.pet.triggerScriptedState('idle', App.INF, 0, true);
-        App.sendAnalytics('school_minigame_expression');
+        
         App.toggleGameplayControls(false);
 
         App.pet.x = '50%';
@@ -5606,7 +5606,7 @@ class Activities {
         App.pet.x = '50%';
         App.pet.y = '100%';
         App.pet.triggerScriptedState('idle', App.INF, 0, true);
-        App.sendAnalytics('school_minigame_endurance');
+        
 
         let jumpingRope;
         let currentScore = 0, canScore = false, timeLeft = 12, firstJump = false;
@@ -5722,7 +5722,7 @@ class Activities {
         maxAttempts = 4,
         skillIcon,
     } = {}){
-        App.sendAnalytics(`school_minigame_shuffle`);
+        
         App.pet.triggerScriptedState('idle', App.INF, null, true);
         const screen = App.displayEmpty();
         screen.innerHTML = `
