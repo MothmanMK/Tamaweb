@@ -438,9 +438,6 @@ const App = {
             App.loadingEnded = true;
         }, 50)
 
-        // rudder stack
-        this.initRudderStack();
-
         // session start event
         App.sendSessionEvent(true);
 
@@ -448,14 +445,6 @@ const App = {
         setInterval(() => {
             App.save(true);
         }, App.constants.AUTO_SAVE_INTERVAL_SECS * 1000);
-    },
-    initRudderStack: function(){
-        rudderanalytics.identify(App.userId, {
-            username: App.userName,
-            petName: App.petDefinition?.name,
-            playTime: App.playTime,
-            isOnItch: App.isOnItch,
-        })
     },
     registerInputUpdates: function(){
         const moveEventHandler = (evt) => {
@@ -3382,12 +3371,12 @@ const App = {
                         return true;
                     }
                 },
-                { type: 'separator' },
+             
                 {
                     name: 'credits',
                     onclick: () => App.handlers.open_credits(),
                 },
-                { type: 'separator' },
+              
                 {
                     _disable: true,
                     name: `Version ${VERSION || '???'}`,
@@ -7594,52 +7583,8 @@ const App = {
         if(!navigator?.vibrate) return;
         navigator?.vibrate(dur || 35);
     },
-    sendAnalytics: function(type, value, force){
-        if(!force && App.ENV !== 'prod') return;
 
-        if(!type) type = 'default';
 
-        rudderanalytics.track(
-            type, {value},
-        );
-
-        if(App.isOnItch) type += '_itch';
-        else if(App.isOnElectronClient) type += '_electron';
-
-        const user = (App.userName ? App.userName + '-' : '') + App.userId;
-        const url = `none`;
-
-        fetch(url).catch(e => {});
-    },
-    sendFeedback: function(text){
-        if(!text) return;
-
-        const sendingText = `[game:${VERSION}-pl:${App.isOnItch ? 'itch' : 'web'}]: ${text}`;
-
-        const user = (App.userName ? App.userName + '-' : '') + App.userId;
-        const url = `none`;
-        fetch(url).catch(e => {});
-    },
-    sendErrorLog: function(error, force){
-        if(!force && App.ENV !== 'prod') return;
-
-        if(!error) return;
-
-        if(App.fullTime - App.temp.lastErrorSent < App.constants.ONE_SECOND * 30){
-            return;
-        }
-        App.temp.lastErrorSent = App.fullTime;
-
-        window?.Sentry?.captureException(error, {
-            username: App.userName,
-            userId: App.userId,
-        });
-
-        const versionInfo = `[game:${VERSION}-pl:${App.isOnItch ? 'itch' : 'web'}]`;
-        const user = (App.userName ? App.userName + '-' : '') + App.userId;
-        const url = `none`
-        fetch(url).catch(e => {});
-    },
     installAsPWA: function() { 
         if(!App.deferredInstallPrompt) return false;
         App.deferredInstallPrompt.prompt();

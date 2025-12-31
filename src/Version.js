@@ -1,1 +1,1 @@
-VERSION = '1.10.4-p';
+VERSION = '1.10.4p';
