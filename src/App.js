@@ -985,39 +985,7 @@ const App = {
         //     ])
         // })) return;
 
-        if(addEvent(`update_23_notice`, () => {
-            App.displayList([
-                {
-                    name: 'New update is available!',
-                    type: 'text',
-                    solid: true,
-                    bold: true,
-                },
-                {
-                    name: `
-                        <img class="update-banner" src="resources/img/ui/update_banner.png"></img>
-                        <br>
-                        <div>
-                        Check out the <b>Seasons</b> feature, <b>Santa Encounter</b>, <b>New Flags Minigame</b>, <b>Rebalances</b> and more!
-                        </div>
-                    `,
-                    type: 'text',
-                },
-                {
-                    link: App.routes.BLOG,
-                    name: 'see whats new',
-                    class: 'solid primary',
-                    onclick: () => {
-                        
-                    }
-                },
-            ])
-        }, false)) return;
-
-        if(addEvent('itch_rating_dialog', () => {
-            App.handlers.show_rating_dialog();
-            
-        })) return;
+    
 
         // if(addEvent(`smallchange_01_notice`, () => {
         //     App.displayConfirm('The <b>Stay with parents</b> option is now moved to the <i class="fa-solid fa-house-chimney-user"></i> care menu', [
@@ -1053,27 +1021,6 @@ const App = {
         })) return;  */
 
 
-        if(addEvent(`discord_server_02_notice`, () => {
-            App.displayConfirm(`<b>We have a Discord server!</b><br>Join us for early sneak peeks at upcoming features, interact with our community, and more!`, [
-                {
-                    link: App.routes.DISCORD,
-                    name: 'join (+$200)',
-                    onclick: () => {
-                        App.pet.stats.gold += 200;
-                        
-                        return false;
-                    },
-                }, 
-                {
-                    name: 'cancel',
-                    class: 'back-btn',
-                    onclick: () => {
-                        App.displayPopup('You can join the server through <b>Settings > Join Discord</b> if you ever change your mind', 5000)
-                    }
-                }
-            ]);
-            
-        })) return;
 
         /* if(App.isSalesDay()){
             if(addEvent(`sales_day_${dayId}_notice`, () => {
@@ -3439,45 +3386,6 @@ const App = {
                 {
                     name: 'credits',
                     onclick: () => App.handlers.open_credits(),
-                },
-                {
-                    name: `send feedback`,
-                    onclick: () => {
-                        return App.displayPrompt(`what would you like to to be added in the next update?`, [
-                            {
-                                name: 'send',
-                                onclick: (data) => {
-                                    if(!data) return true;
-                                    App.displayPopup(`<b>Suggestion sent!</b><br> thanks for participating!`, 4000);
-                                    App.sendFeedback(data);
-                                },
-                            },
-                            {
-                                name: 'cancel',
-                                class: 'back-btn',
-                                onclick: () => {},
-                            }
-                        ]);
-                    }
-                },
-                {
-                    name: `<b>rate us!</b>`,
-                    onclick: () => App.handlers.show_rating_dialog()
-                },
-                {
-                    // _ignore: true,
-                    link: App.routes.BLOG,
-                    name: `<b>see changelog</b>`,
-                    onclick: () => {
-                        
-                        return true;
-                    },
-                },
-                {
-                    // _ignore: true,
-                    link: App.routes.DISCORD,
-                    name: '<b>join <span style="color:#7289da;text-shadow:none;">discord</span></b>',
-                    onclick: () => true,
                 },
                 { type: 'separator' },
                 {
